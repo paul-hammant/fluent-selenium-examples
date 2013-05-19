@@ -34,7 +34,7 @@ public class BuyAHatTest {
         new SearchResults(wd) {
             {
                 numberMatchingSearchHeader().shouldMatch(".*\\d items.*");
-                firstNonSponoredListing().link().click();
+                firstNonSponsoredListing().link().click();
             }
         };
 

@@ -17,7 +17,7 @@ public class SearchResults extends FluentWebDriverImpl {
         assertThat(delegate.getCurrentUrl(), containsString("/search?"));
     }
 
-    protected FluentWebElement firstNonSponoredListing() {
+    protected FluentWebElement firstNonSponsoredListing() {
         return ul(className("listings")).lis().get(0);
     }
 
