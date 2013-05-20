@@ -24,28 +24,22 @@ public class BookAFlightTest {
     @Test
     public void a_booking_through_to_a_hipmunk_partner() {
 
-        new Home(wd) {
-            {
+        new Home(wd) {{
                 fromAirportField().sendKeys("DFW");
                 waitForExpandoToComplete();
                 toAirportField().sendKeys("ORD");
                 searchButton().click();
-            }
-        };
+        }};
 
-        new SearchResults(wd) {
-            {
-                waitForFlightListFor("DFW → ORD");
-                firstShownLeg().click();
-                waitForFlightListFor("ORD → DFW");
-                firstShownLeg().click();
+        new SearchResults(wd) {{
+            waitForFlightListFor("DFW → ORD");
+            firstShownLeg().click();
+            waitForFlightListFor("ORD → DFW");
+            firstShownLeg().click();
 
-                new BookingOverlay(wd) {
-                    {
-                        firstBookButton().click();
-                    }
-                };
-            }
-        };
+            new BookingOverlay(wd) {{
+                    firstBookButton().click();
+            }};
+        }};
     }
 }
