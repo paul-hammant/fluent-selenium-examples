@@ -18,7 +18,7 @@ public class BuyAHatTest {
 
     @After
     public void killWebDriver() {
-        wd.close();
+        wd.quit();
     }
 
     @Test

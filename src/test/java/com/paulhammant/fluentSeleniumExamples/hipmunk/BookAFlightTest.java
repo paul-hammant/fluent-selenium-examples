@@ -18,7 +18,7 @@ public class BookAFlightTest {
 
     @After
     public void killWebDriver() {
-        wd.close();
+        wd.quit();
     }
 
     @Test
