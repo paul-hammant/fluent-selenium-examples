@@ -1,7 +1,7 @@
 package com.paulhammant.fluentSeleniumExamples.etsy;
 
 import org.openqa.selenium.WebDriver;
-import org.seleniumhq.selenium.fluent.FluentWebDriverImpl;
+import org.seleniumhq.selenium.fluent.FluentWebDriver;
 import org.seleniumhq.selenium.fluent.FluentWebElement;
 import org.seleniumhq.selenium.fluent.TestableString;
 
@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.openqa.selenium.By.className;
 import static org.openqa.selenium.By.id;
 
-public class SearchResults extends FluentWebDriverImpl {
+public class SearchResults extends FluentWebDriver {
     public SearchResults(WebDriver delegate) {
         super(delegate, Context.singular(null, "SearchResults", ""));
 
