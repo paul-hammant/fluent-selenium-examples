@@ -8,7 +8,7 @@ import static org.openqa.selenium.By.id;
 
 public class Home extends FluentWebDriver {
     public Home(WebDriver delegate) {
-        super(delegate, Context.singular(null, "SearchCriteria", ""));
+        super(delegate);
 
         url().shouldMatch(".*etsy.com/");
     }

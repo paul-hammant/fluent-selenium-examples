@@ -10,7 +10,7 @@ import static org.openqa.selenium.By.id;
 
 public class Cart extends FluentWebDriver {
     public Cart(WebDriver delegate) {
-        super(delegate, Context.singular(null, "Cart", ""));
+        super(delegate);
 
         assertThat(delegate.getCurrentUrl(), containsString("etsy.com/cart/"));
     }

@@ -3,6 +3,7 @@ package com.paulhammant.fluentSeleniumExamples.hipmunk;
 import org.openqa.selenium.WebDriver;
 import org.seleniumhq.selenium.fluent.FluentWebDriver;
 import org.seleniumhq.selenium.fluent.FluentWebElement;
+import org.seleniumhq.selenium.fluent.RetryAfterStaleElement;
 
 import static org.openqa.selenium.By.className;
 import static org.openqa.selenium.By.id;
@@ -10,7 +11,7 @@ import static org.seleniumhq.selenium.fluent.Period.secs;
 
 public class SearchResults extends FluentWebDriver {
     public SearchResults(WebDriver delegate) {
-        super(delegate, Context.singular(null, "SearchResults", ""));
+        super(delegate);
 
         within(secs(2)).url().shouldContain("hipmunk.com/flights/");
 

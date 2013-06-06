@@ -10,7 +10,7 @@ import static org.openqa.selenium.By.className;
 
 public class Listing extends FluentWebDriver {
     public Listing(WebDriver delegate) {
-        super(delegate, Context.singular(null, "Listing", ""));
+        super(delegate);
 
         assertThat(delegate.getCurrentUrl(), containsString("etsy.com/listing/"));
     }

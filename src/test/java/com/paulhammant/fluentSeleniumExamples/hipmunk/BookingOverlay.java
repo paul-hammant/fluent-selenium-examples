@@ -9,7 +9,7 @@ import static org.seleniumhq.selenium.fluent.Period.secs;
 
 public class BookingOverlay extends FluentWebDriver {
     public BookingOverlay(WebDriver delegate) {
-        super(delegate, Context.singular(null, "SearchResults", ""));
+        super(delegate);
 
         within(secs(8)).div(className("booking-info-container"));
 

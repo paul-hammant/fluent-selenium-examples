@@ -12,7 +12,7 @@ import static org.openqa.selenium.By.id;
 
 public class SearchResults extends FluentWebDriver {
     public SearchResults(WebDriver delegate) {
-        super(delegate, Context.singular(null, "SearchResults", ""));
+        super(delegate);
 
         assertThat(delegate.getCurrentUrl(), containsString("/search?"));
     }
