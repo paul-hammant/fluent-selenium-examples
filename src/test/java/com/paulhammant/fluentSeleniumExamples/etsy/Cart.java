@@ -4,15 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.seleniumhq.selenium.fluent.FluentWebDriver;
 import org.seleniumhq.selenium.fluent.TestableString;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 import static org.openqa.selenium.By.id;
+import static org.seleniumhq.selenium.fluent.Period.secs;
 
 public class Cart extends FluentWebDriver {
     public Cart(WebDriver delegate) {
         super(delegate);
 
-        assertThat(delegate.getCurrentUrl(), containsString("etsy.com/cart/"));
+        url().within(secs(1)).shouldContain("etsy.com/cart/");
     }
 
     protected TestableString numberOfItemsInCartHeader() {
