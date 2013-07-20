@@ -16,7 +16,7 @@ public class Listing extends FluentWebDriver {
     }
 
     protected FluentWebElement addToCartButton() {
-        return form(className("add-to-cart-form")).span().input();
+        return button(className("btn-transaction"));
     }
 
 }
