@@ -1,5 +1,6 @@
 package com.paulhammant.fluentSeleniumExamples.hipmunk;
 
+import com.paulhammant.fluentSeleniumExamples.WholeSuiteListener;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +15,7 @@ public class BookAFlightTest {
     public void makeWebDriverAndGotoSite() {
         wd = new FirefoxDriver();
         wd.get("http://hipmunk.com");
+        WholeSuiteListener.codehaleMetricsMonitor.addClass(this.getClass());
     }
 
     @After

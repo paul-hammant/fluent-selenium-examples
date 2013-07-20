@@ -11,8 +11,8 @@ import static org.openqa.selenium.By.className;
 
 public class Listing extends FluentWebDriver {
     public Listing(WebDriver delegate) {
-        super(delegate, WholeSuiteListener.codehaleMonitor);
-
+        super(delegate, WholeSuiteListener.codehaleMetricsMonitor);
+        monitor.addClass(this.getClass());
         assertThat(delegate.getCurrentUrl(), containsString("etsy.com/listing/"));
     }
 

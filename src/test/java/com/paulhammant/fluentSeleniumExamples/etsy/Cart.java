@@ -10,8 +10,8 @@ import static org.seleniumhq.selenium.fluent.Period.secs;
 
 public class Cart extends FluentWebDriver {
     public Cart(WebDriver delegate) {
-        super(delegate, WholeSuiteListener.codehaleMonitor);
-
+        super(delegate, WholeSuiteListener.codehaleMetricsMonitor);
+        monitor.addClass(this.getClass());
         url().within(secs(1)).shouldContain("etsy.com/cart/");
     }
 

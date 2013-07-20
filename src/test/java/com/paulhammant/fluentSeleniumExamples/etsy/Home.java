@@ -9,8 +9,8 @@ import static org.openqa.selenium.By.id;
 
 public class Home extends FluentWebDriver {
     public Home(WebDriver delegate) {
-        super(delegate, WholeSuiteListener.codehaleMonitor);
-
+        super(delegate, WholeSuiteListener.codehaleMetricsMonitor);
+        monitor.addClass(this.getClass());
         url().shouldMatch(".*etsy.com/");
     }
 

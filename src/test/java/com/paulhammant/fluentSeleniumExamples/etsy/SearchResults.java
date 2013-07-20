@@ -13,8 +13,8 @@ import static org.openqa.selenium.By.id;
 
 public class SearchResults extends FluentWebDriver {
     public SearchResults(WebDriver delegate) {
-        super(delegate, WholeSuiteListener.codehaleMonitor);
-
+        super(delegate, WholeSuiteListener.codehaleMetricsMonitor);
+        monitor.addClass(this.getClass());
         assertThat(delegate.getCurrentUrl(), containsString("/search?"));
     }
 

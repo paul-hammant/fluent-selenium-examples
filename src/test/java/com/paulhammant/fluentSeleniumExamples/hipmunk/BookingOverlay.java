@@ -10,8 +10,8 @@ import static org.seleniumhq.selenium.fluent.Period.secs;
 
 public class BookingOverlay extends FluentWebDriver {
     public BookingOverlay(WebDriver delegate) {
-        super(delegate, WholeSuiteListener.codehaleMonitor);
-
+        super(delegate, WholeSuiteListener.codehaleMetricsMonitor);
+        monitor.addClass(this.getClass());
         within(secs(8)).div(className("booking-info-container"));
 
     }
