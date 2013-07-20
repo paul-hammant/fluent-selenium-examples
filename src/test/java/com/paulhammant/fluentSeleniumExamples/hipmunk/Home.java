@@ -10,8 +10,7 @@ import static org.seleniumhq.selenium.fluent.Period.secs;
 
 public class Home extends FluentWebDriver {
     public Home(WebDriver delegate) {
-        super(delegate, WholeSuiteListener.codehaleMetricsMonitor);
-        monitor.addClass(this.getClass());
+        super(delegate, WholeSuiteListener.codahaleMetricsMonitor);
         url().shouldMatch(".*hipmunk.com/");
     }
 

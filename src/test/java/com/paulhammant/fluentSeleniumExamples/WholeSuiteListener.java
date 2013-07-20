@@ -3,7 +3,7 @@ package com.paulhammant.fluentSeleniumExamples;
 import com.codahale.metrics.ConsoleReporter;
 import org.junit.runner.Result;
 import org.junit.runner.notification.RunListener;
-import org.seleniumhq.selenium.fluent.monitors.CodehaleMetricsMonitor;
+import org.seleniumhq.selenium.fluent.monitors.CodaHaleMetricsMonitor;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -17,7 +17,7 @@ public class WholeSuiteListener extends RunListener {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        final ConsoleReporter reporter = ConsoleReporter.forRegistry(codehaleMetricsMonitor.getMetrics())
+        final ConsoleReporter reporter = ConsoleReporter.forRegistry(codahaleMetricsMonitor.getMetrics())
                 .convertRatesTo(TimeUnit.MILLISECONDS)
                 .convertDurationsTo(TimeUnit.MILLISECONDS)
                 .outputTo(new PrintStream(baos))
@@ -31,6 +31,6 @@ public class WholeSuiteListener extends RunListener {
 
     }
 
-    public static CodehaleMetricsMonitor codehaleMetricsMonitor = new CodehaleMetricsMonitor("com.paulhammant.fluentSeleniumExamples.");
+    public static final CodaHaleMetricsMonitor codahaleMetricsMonitor = new CodaHaleMetricsMonitor("com.paulhammant.fluentSeleniumExamples.");
 }
 

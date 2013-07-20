@@ -23,7 +23,7 @@
     <dependency>
       <groupId>org.seleniumhq.selenium.fluent</groupId>
       <artifactId>fluent-selenium</artifactId>
-      <version>1.9.2-SNAPSHOT</version>
+      <version>1.10</version>
       <scope>test</scope>
     </dependency>
     <dependency>

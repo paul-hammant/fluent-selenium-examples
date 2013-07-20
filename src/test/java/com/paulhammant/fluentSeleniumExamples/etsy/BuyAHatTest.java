@@ -1,6 +1,5 @@
 package com.paulhammant.fluentSeleniumExamples.etsy;
 
-import com.paulhammant.fluentSeleniumExamples.WholeSuiteListener;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +14,6 @@ public class BuyAHatTest {
     public void makeWebDriverAndGotoSite() {
         wd = new FirefoxDriver();
         wd.get("http://etsy.com");
-        WholeSuiteListener.codehaleMetricsMonitor.addClass(this.getClass());
     }
 
     @After

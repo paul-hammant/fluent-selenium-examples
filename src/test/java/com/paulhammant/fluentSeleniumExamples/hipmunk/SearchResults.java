@@ -11,8 +11,7 @@ import static org.seleniumhq.selenium.fluent.Period.secs;
 
 public class SearchResults extends FluentWebDriver {
     public SearchResults(WebDriver delegate) {
-        super(delegate, WholeSuiteListener.codehaleMetricsMonitor);
-        monitor.addClass(this.getClass());
+        super(delegate, WholeSuiteListener.codahaleMetricsMonitor);
         within(secs(2)).url().shouldContain("hipmunk.com/flights/");
 
         // move past interstitial
