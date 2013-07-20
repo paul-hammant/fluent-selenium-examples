@@ -1,5 +1,6 @@
 package com.paulhammant.fluentSeleniumExamples.etsy;
 
+import com.paulhammant.fluentSeleniumExamples.WholeSuiteListener;
 import org.openqa.selenium.WebDriver;
 import org.seleniumhq.selenium.fluent.FluentWebDriver;
 import org.seleniumhq.selenium.fluent.TestableString;
@@ -9,7 +10,7 @@ import static org.seleniumhq.selenium.fluent.Period.secs;
 
 public class Cart extends FluentWebDriver {
     public Cart(WebDriver delegate) {
-        super(delegate);
+        super(delegate, WholeSuiteListener.codehaleMonitor);
 
         url().within(secs(1)).shouldContain("etsy.com/cart/");
     }

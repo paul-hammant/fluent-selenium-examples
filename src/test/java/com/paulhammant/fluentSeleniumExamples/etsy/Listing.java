@@ -1,5 +1,6 @@
 package com.paulhammant.fluentSeleniumExamples.etsy;
 
+import com.paulhammant.fluentSeleniumExamples.WholeSuiteListener;
 import org.openqa.selenium.WebDriver;
 import org.seleniumhq.selenium.fluent.FluentWebDriver;
 import org.seleniumhq.selenium.fluent.FluentWebElement;
@@ -10,7 +11,7 @@ import static org.openqa.selenium.By.className;
 
 public class Listing extends FluentWebDriver {
     public Listing(WebDriver delegate) {
-        super(delegate);
+        super(delegate, WholeSuiteListener.codehaleMonitor);
 
         assertThat(delegate.getCurrentUrl(), containsString("etsy.com/listing/"));
     }

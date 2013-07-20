@@ -1,5 +1,6 @@
 package com.paulhammant.fluentSeleniumExamples.hipmunk;
 
+import com.paulhammant.fluentSeleniumExamples.WholeSuiteListener;
 import org.openqa.selenium.WebDriver;
 import org.seleniumhq.selenium.fluent.FluentWebDriver;
 import org.seleniumhq.selenium.fluent.FluentWebElement;
@@ -10,7 +11,7 @@ import static org.seleniumhq.selenium.fluent.Period.secs;
 
 public class SearchResults extends FluentWebDriver {
     public SearchResults(WebDriver delegate) {
-        super(delegate);
+        super(delegate, WholeSuiteListener.codehaleMonitor);
 
         within(secs(2)).url().shouldContain("hipmunk.com/flights/");
 
