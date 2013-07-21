@@ -32,9 +32,9 @@ public class BookAFlightTest {
         }};
 
         new SearchResults(wd) {{
-            waitForFlightListFor("DFW → ORD");
+            waitForFlightListFor("DFW\nORD");
             firstShownLeg().click();
-            waitForFlightListFor("ORD → DFW");
+            waitForFlightListFor("ORD\nDFW");
             firstShownLeg().click();
 
             new BookingOverlay(wd) {{

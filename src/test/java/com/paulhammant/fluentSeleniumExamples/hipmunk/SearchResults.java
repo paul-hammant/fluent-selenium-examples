@@ -19,8 +19,7 @@ public class SearchResults extends FluentWebDriver {
     }
 
     protected void waitForFlightListFor(final String flights) {
-        // this silently moves past a StaleElementReferenceException that sometimes happens
-        div(className("fromto-column")).getText().within(secs(2)).shouldBe(flights);
+        div(id("leg-selector-1")).div(className("selected")).getText().within(secs(2)).shouldContain(flights);
     }
 
     protected FluentWebElement firstShownLeg() {
