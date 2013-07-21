@@ -5,12 +5,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.seleniumhq.selenium.fluent.FluentWebElement;
 import org.seleniumhq.selenium.fluent.Monitor;
+
+import java.util.Set;
 
 public class BookAFlightTest {
 
     private WebDriver wd;
     private Monitor.Timer bizOperationTiming;
+    private int claimedPricelinePrice;
+    private String hipmunkWindowHandle;
+
 
     @Before
     public void makeWebDriverAndGotoSite() {
@@ -24,8 +30,7 @@ public class BookAFlightTest {
     }
 
     @Test
-    public void a_booking_through_to_a_hipmunk_partner() {
-
+    public void a_booking_through_to_priceline_affiliate() {
 
         new Home(wd) {{
             fromAirportField().sendKeys("DFW");
@@ -45,8 +50,31 @@ public class BookAFlightTest {
             firstShownLeg().click();
 
             new BookingOverlay(wd) {{
-                firstBookButton().click();
-            }};
+                hipmunkWindowHandle = delegate.getWindowHandle();
+                FluentWebElement fluentWebElement = pricelineRow();
+                claimedPricelinePrice = Integer.parseInt(fluentWebElement.div().getText().toString().replace("$",""));
+                bizOperationTiming = monitor.start("DFW->ORD Priceline Transfer (End User Experience)");
+                fluentWebElement.link().click();
+                changeWebDriverWindow(delegate);
+            }
+
+            };
         }};
+
+        new PricelineAffiliateBooking(wd) {{
+            confirmPriceIs(claimedPricelinePrice);
+            bizOperationTiming.end();
+        }};
+
     }
+
+    private void changeWebDriverWindow(WebDriver driver) {
+        Set<String> handles = driver.getWindowHandles();
+        for (String popupHandle : handles) {
+            if (!popupHandle.contains(hipmunkWindowHandle)) {
+                driver.switchTo().window(popupHandle);
+            }
+        }
+    }
+
 }

@@ -2,6 +2,8 @@ package com.paulhammant.fluentSeleniumExamples.hipmunk;
 
 import com.paulhammant.fluentSeleniumExamples.WholeSuiteListener;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.seleniumhq.selenium.fluent.FluentMatcher;
 import org.seleniumhq.selenium.fluent.FluentWebDriver;
 import org.seleniumhq.selenium.fluent.FluentWebElement;
 
@@ -15,8 +17,12 @@ public class BookingOverlay extends FluentWebDriver {
 
     }
 
-    protected FluentWebElement firstBookButton() {
-        return div(className("booking-link-row")).link();
+    protected FluentWebElement pricelineRow() {
+        return divs(className("booking-link-row")).first(new FluentMatcher() {
+            public boolean matches(WebElement webElement) {
+                return webElement.getText().contains("Priceline");
+            }
+        });
     }
 
 }
