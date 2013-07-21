@@ -5,10 +5,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.seleniumhq.selenium.fluent.Monitor;
 
 public class BookAFlightTest {
 
     private WebDriver wd;
+    private Monitor.Timer bizOperationTiming;
 
     @Before
     public void makeWebDriverAndGotoSite() {
@@ -24,21 +26,26 @@ public class BookAFlightTest {
     @Test
     public void a_booking_through_to_a_hipmunk_partner() {
 
+
         new Home(wd) {{
-                fromAirportField().sendKeys("DFW");
-                waitForExpandoToComplete();
-                toAirportField().sendKeys("ORD");
-                searchButton().click();
+            fromAirportField().sendKeys("DFW");
+            waitForExpandoToComplete();
+            toAirportField().sendKeys("ORD");
+            bizOperationTiming = monitor.start("DFW->ORD Initial Search Results (End User Experience)");
+            searchButton().click();
         }};
 
         new SearchResults(wd) {{
             waitForFlightListFor("DFW\nORD");
+            bizOperationTiming.end();
+            bizOperationTiming = monitor.start("DFW->ORD Return Leg Search Results (End User Experience)");
             firstShownLeg().click();
             waitForFlightListFor("ORD\nDFW");
+            bizOperationTiming.end();
             firstShownLeg().click();
 
             new BookingOverlay(wd) {{
-                    firstBookButton().click();
+                firstBookButton().click();
             }};
         }};
     }
