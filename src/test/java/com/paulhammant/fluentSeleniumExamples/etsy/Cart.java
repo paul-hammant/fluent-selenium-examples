@@ -11,7 +11,7 @@ import static org.seleniumhq.selenium.fluent.Period.secs;
 public class Cart extends FluentWebDriver {
     public Cart(WebDriver delegate) {
         super(delegate, WholeSuiteListener.codahaleMetricsMonitor);
-        url().within(secs(1)).shouldContain("etsy.com/cart/");
+        url().within(secs(2)).shouldContain("etsy.com/cart/");
     }
 
     protected TestableString numberOfItemsInCartHeader() {

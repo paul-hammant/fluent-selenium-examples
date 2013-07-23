@@ -1,5 +1,6 @@
 package com.paulhammant.fluentSeleniumExamples.hipmunk;
 
+import com.paulhammant.fluentSeleniumExamples.WholeSuiteListener;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +10,9 @@ import org.seleniumhq.selenium.fluent.FluentWebElement;
 import org.seleniumhq.selenium.fluent.Monitor;
 
 import java.util.Set;
+
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertThat;
 
 public class BookAFlightTest {
 
@@ -36,14 +40,14 @@ public class BookAFlightTest {
             fromAirportField().sendKeys("DFW");
             waitForExpandoToComplete();
             toAirportField().sendKeys("ORD");
-            bizOperationTiming = monitor.start("DFW->ORD Initial Search Results (End User Experience)");
+            timeBizOperation("DFW->ORD Initial Search Results");
             searchButton().click();
         }};
 
         new SearchResults(wd) {{
             waitForFlightListFor("DFW\nORD");
             bizOperationTiming.end();
-            bizOperationTiming = monitor.start("DFW->ORD Return Leg Search Results (End User Experience)");
+            timeBizOperation("DFW->ORD Return Leg Search Results");
             firstShownLeg().click();
             waitForFlightListFor("ORD\nDFW");
             bizOperationTiming.end();
@@ -51,18 +55,17 @@ public class BookAFlightTest {
 
             new BookingOverlay(wd) {{
                 hipmunkWindowHandle = delegate.getWindowHandle();
-                FluentWebElement fluentWebElement = pricelineRow();
-                claimedPricelinePrice = Integer.parseInt(fluentWebElement.div().getText().toString().replace("$",""));
-                bizOperationTiming = monitor.start("DFW->ORD Priceline Transfer (End User Experience)");
-                fluentWebElement.link().click();
+                FluentWebElement pricelineRow = pricelineRow();
+                claimedPricelinePrice = Integer.parseInt(pricelineRow.div().getText().toString().replace("$", ""));
+                timeBizOperation("DFW->ORD Priceline Transfer");
+                pricelineRow.link().click(); // purchase
                 changeWebDriverWindow(delegate);
-            }
-
-            };
+            }};
         }};
 
         new PricelineAffiliateBooking(wd) {{
-            confirmPriceIs(claimedPricelinePrice);
+            float actualPrice = getActualPrice(); // includes cents
+            assertThat("price", Math.round(actualPrice), equalTo(claimedPricelinePrice));
             bizOperationTiming.end();
         }};
 
@@ -75,6 +78,10 @@ public class BookAFlightTest {
                 driver.switchTo().window(popupHandle);
             }
         }
+    }
+
+    private void timeBizOperation(String description) {
+        bizOperationTiming = WholeSuiteListener.codahaleMetricsMonitor.start(description + " (End User Experience)");
     }
 
 }
