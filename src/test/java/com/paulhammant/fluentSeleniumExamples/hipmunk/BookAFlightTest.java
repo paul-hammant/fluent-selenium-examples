@@ -21,12 +21,12 @@ public class BookAFlightTest {
     }
 
     @Test
-    public void a_booking_through_to_priceline_affiliate() {
+    public void a_booking_through_to_united_affiliate() {
 
         new Home(wd)
-                .searchRoute("DFW", "ORD")
+                .searchRoute("DAL", "IAH")
                 .selectLegs()
-                .startBookingViaPriceLineDotCom()
+                .startBookingViaUnitedDotCom()
                 .assertPriceAsPromised();
 
     }

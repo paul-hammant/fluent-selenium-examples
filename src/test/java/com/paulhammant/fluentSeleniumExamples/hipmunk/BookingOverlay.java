@@ -23,14 +23,14 @@ public class BookingOverlay extends BasePage {
 
     }
 
-    public PricelineAffiliateBooking startBookingViaPriceLineDotCom() {
+    public UnitedAirlinesBooking startBookingViaUnitedDotCom() {
         hipmunkWindowHandle = delegate.getWindowHandle();
-        FluentWebElement pricelineRow = pricelineRow();
-        int claimedPricelinePrice = Integer.parseInt(pricelineRow.div().getText().toString().replace("$", ""));
-        timeBizOperation("DFW->ORD Priceline Transfer");
-        pricelineRow.link().click(); // purchase
+        FluentWebElement unitedRow = unitedRow();
+        int claimedUnitedPrice = Integer.parseInt(unitedRow.div().getText().toString().replace("$", ""));
+        timeBizOperation("DFW->ORD United Transfer");
+        unitedRow.link().click(); // purchase
         changeWebDriverWindow(delegate);
-        return new PricelineAffiliateBooking((FirefoxDriver) delegate, bizOperationTiming, claimedPricelinePrice);
+        return new UnitedAirlinesBooking((FirefoxDriver) delegate, bizOperationTiming, claimedUnitedPrice);
     }
 
     private void changeWebDriverWindow(WebDriver driver) {
@@ -41,15 +41,15 @@ public class BookingOverlay extends BasePage {
             }
         }
     }
-    protected FluentWebElement pricelineRow() {
+    protected FluentWebElement unitedRow() {
         return divs(className("booking-link-row")).first(new FluentMatcher() {
             public boolean matches(WebElement webElement) {
-                return webElement.getText().contains("Priceline");
+                return webElement.getText().contains("United");
             }
 
             @Override
             public String toString() {
-                return "Is PriceLine.com";
+                return "Matches United Airlines";
             }
         });
     }
