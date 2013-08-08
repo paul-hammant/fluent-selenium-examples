@@ -46,11 +46,11 @@ public class BookAFlightTest {
 
         new SearchResults(wd) {{
             waitForFlightListFor("DFW\nORD");
-            bizOperationTiming.end();
+            bizOperationTiming.end(true);
             timeBizOperation("DFW->ORD Return Leg Search Results");
             firstShownLeg().click();
             waitForFlightListFor("ORD\nDFW");
-            bizOperationTiming.end();
+            bizOperationTiming.end(true);
             firstShownLeg().click();
 
             new BookingOverlay(wd) {{
@@ -66,7 +66,7 @@ public class BookAFlightTest {
         new PricelineAffiliateBooking(wd) {{
             float actualPrice = getActualPrice(); // includes cents
             assertThat("price", Math.round(actualPrice), equalTo(claimedPricelinePrice));
-            bizOperationTiming.end();
+            bizOperationTiming.end(true);
         }};
 
     }

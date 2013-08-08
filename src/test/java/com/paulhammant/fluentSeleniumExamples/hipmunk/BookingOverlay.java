@@ -22,6 +22,11 @@ public class BookingOverlay extends FluentWebDriver {
             public boolean matches(WebElement webElement) {
                 return webElement.getText().contains("Priceline");
             }
+
+            @Override
+            public String toString() {
+                return "Is PriceLine.com";
+            }
         });
     }
 
