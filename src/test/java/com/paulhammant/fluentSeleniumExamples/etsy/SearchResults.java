@@ -1,8 +1,7 @@
 package com.paulhammant.fluentSeleniumExamples.etsy;
 
-import com.paulhammant.fluentSeleniumExamples.WholeSuiteListener;
-import org.openqa.selenium.WebDriver;
-import org.seleniumhq.selenium.fluent.FluentWebDriver;
+import com.paulhammant.fluentSeleniumExamples.BasePage;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.seleniumhq.selenium.fluent.FluentWebElement;
 import org.seleniumhq.selenium.fluent.TestableString;
 
@@ -11,9 +10,9 @@ import static org.hamcrest.Matchers.containsString;
 import static org.openqa.selenium.By.className;
 import static org.openqa.selenium.By.id;
 
-public class SearchResults extends FluentWebDriver {
-    public SearchResults(WebDriver delegate) {
-        super(delegate, WholeSuiteListener.codahaleMetricsMonitor);
+public class SearchResults extends BasePage {
+    public SearchResults(FirefoxDriver delegate) {
+        super(delegate);
         assertThat(delegate.getCurrentUrl(), containsString("/search?"));
     }
 

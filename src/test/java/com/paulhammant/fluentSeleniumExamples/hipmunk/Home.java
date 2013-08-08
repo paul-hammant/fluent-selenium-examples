@@ -1,16 +1,15 @@
 package com.paulhammant.fluentSeleniumExamples.hipmunk;
 
-import com.paulhammant.fluentSeleniumExamples.WholeSuiteListener;
-import org.openqa.selenium.WebDriver;
-import org.seleniumhq.selenium.fluent.FluentWebDriver;
+import com.paulhammant.fluentSeleniumExamples.BasePage;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.seleniumhq.selenium.fluent.FluentWebElement;
 
 import static org.openqa.selenium.By.id;
 import static org.seleniumhq.selenium.fluent.Period.secs;
 
-public class Home extends FluentWebDriver {
-    public Home(WebDriver delegate) {
-        super(delegate, WholeSuiteListener.codahaleMetricsMonitor);
+public class Home extends BasePage {
+    public Home(FirefoxDriver delegate) {
+        super(delegate);
         url().shouldMatch(".*hipmunk.com/");
     }
 

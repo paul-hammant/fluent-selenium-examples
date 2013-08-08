@@ -1,15 +1,14 @@
 package com.paulhammant.fluentSeleniumExamples.etsy;
 
-import com.paulhammant.fluentSeleniumExamples.WholeSuiteListener;
-import org.openqa.selenium.WebDriver;
-import org.seleniumhq.selenium.fluent.FluentWebDriver;
+import com.paulhammant.fluentSeleniumExamples.BasePage;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.seleniumhq.selenium.fluent.FluentWebElement;
 
 import static org.openqa.selenium.By.id;
 
-public class Home extends FluentWebDriver {
-    public Home(WebDriver delegate) {
-        super(delegate, WholeSuiteListener.codahaleMetricsMonitor);
+public class Home extends BasePage {
+    public Home(FirefoxDriver delegate) {
+        super(delegate);
         url().shouldMatch(".*etsy.com/");
     }
 

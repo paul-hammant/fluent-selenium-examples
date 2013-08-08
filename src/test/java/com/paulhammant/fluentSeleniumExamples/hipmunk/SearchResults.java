@@ -1,17 +1,16 @@
 package com.paulhammant.fluentSeleniumExamples.hipmunk;
 
-import com.paulhammant.fluentSeleniumExamples.WholeSuiteListener;
-import org.openqa.selenium.WebDriver;
-import org.seleniumhq.selenium.fluent.FluentWebDriver;
+import com.paulhammant.fluentSeleniumExamples.BasePage;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.seleniumhq.selenium.fluent.FluentWebElement;
 
 import static org.openqa.selenium.By.className;
 import static org.openqa.selenium.By.id;
 import static org.seleniumhq.selenium.fluent.Period.secs;
 
-public class SearchResults extends FluentWebDriver {
-    public SearchResults(WebDriver delegate) {
-        super(delegate, WholeSuiteListener.codahaleMetricsMonitor);
+public class SearchResults extends BasePage {
+    public SearchResults(FirefoxDriver delegate) {
+        super(delegate);
         within(secs(2)).url().shouldContain("hipmunk.com/flights/");
 
         // move past interstitial

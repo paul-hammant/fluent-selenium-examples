@@ -16,11 +16,10 @@ import static org.junit.Assert.assertThat;
 
 public class BookAFlightTest {
 
-    private WebDriver wd;
+    private FirefoxDriver wd;
     private Monitor.Timer bizOperationTiming;
     private int claimedPricelinePrice;
     private String hipmunkWindowHandle;
-
 
     @Before
     public void makeWebDriverAndGotoSite() {

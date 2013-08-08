@@ -3,12 +3,11 @@ package com.paulhammant.fluentSeleniumExamples.etsy;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BuyAHatTest {
 
-    private WebDriver wd;
+    private FirefoxDriver wd;
 
     @Before
     public void makeWebDriverAndGotoSite() {
