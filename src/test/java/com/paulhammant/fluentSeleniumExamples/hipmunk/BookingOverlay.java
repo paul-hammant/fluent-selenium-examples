@@ -16,15 +16,15 @@ public class BookingOverlay extends BasePage {
 
     }
 
-    protected FluentWebElement pricelineRow() {
+    protected FluentWebElement unitedRow() {
         return divs(className("booking-link-row")).first(new FluentMatcher() {
             public boolean matches(WebElement webElement) {
-                return webElement.getText().contains("Priceline");
+                return webElement.getText().contains("United");
             }
 
             @Override
             public String toString() {
-                return "Is PriceLine.com";
+                return "Matches United Airlines";
             }
         });
     }

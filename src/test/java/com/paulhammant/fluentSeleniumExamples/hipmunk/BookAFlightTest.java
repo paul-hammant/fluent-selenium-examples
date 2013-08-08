@@ -18,7 +18,7 @@ public class BookAFlightTest {
 
     private FirefoxDriver wd;
     private Monitor.Timer bizOperationTiming;
-    private int claimedPricelinePrice;
+    private int claimedUnitedPrice;
     private String hipmunkWindowHandle;
 
     @Before
@@ -33,38 +33,38 @@ public class BookAFlightTest {
     }
 
     @Test
-    public void a_booking_through_to_priceline_affiliate() {
+    public void a_booking_through_to_united_affiliate() {
 
         new Home(wd) {{
-            fromAirportField().sendKeys("DFW");
+            fromAirportField().sendKeys("DAL");
             waitForExpandoToComplete();
-            toAirportField().sendKeys("ORD");
-            timeBizOperation("DFW->ORD Initial Search Results");
+            toAirportField().sendKeys("IAH");
+            timeBizOperation("DAL->IAH Initial Search Results");
             searchButton().click();
         }};
 
         new SearchResults(wd) {{
-            waitForFlightListFor("DFW\nORD");
+            waitForFlightListFor("DAL\nIAH");
             bizOperationTiming.end(true);
-            timeBizOperation("DFW->ORD Return Leg Search Results");
+            timeBizOperation("DAL->IAH Return Leg Search Results");
             firstShownLeg().click();
-            waitForFlightListFor("ORD\nDFW");
+            waitForFlightListFor("IAH\nDAL");
             bizOperationTiming.end(true);
             firstShownLeg().click();
 
             new BookingOverlay(wd) {{
                 hipmunkWindowHandle = delegate.getWindowHandle();
-                FluentWebElement pricelineRow = pricelineRow();
-                claimedPricelinePrice = Integer.parseInt(pricelineRow.div().getText().toString().replace("$", ""));
-                timeBizOperation("DFW->ORD Priceline Transfer");
-                pricelineRow.link().click(); // purchase
+                FluentWebElement unitedRow = unitedRow();
+                claimedUnitedPrice = Integer.parseInt(unitedRow.div().getText().toString().replace("$", ""));
+                timeBizOperation("DAL->IAH United.com Transfer");
+                unitedRow.link().click(); // purchase
                 changeWebDriverWindow(delegate);
             }};
         }};
 
-        new PricelineAffiliateBooking(wd) {{
+        new UnitedAirlinesBooking(wd) {{
             float actualPrice = getActualPrice(); // includes cents
-            assertThat("price", Math.round(actualPrice), equalTo(claimedPricelinePrice));
+            assertThat("price", Math.round(actualPrice), equalTo(claimedUnitedPrice));
             bizOperationTiming.end(true);
         }};
 
