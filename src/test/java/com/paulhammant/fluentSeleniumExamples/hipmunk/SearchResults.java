@@ -18,11 +18,11 @@ public class SearchResults extends BasePage {
     }
 
     protected void waitForFlightListFor(final String flights) {
-        div(id("leg-selector-1")).div(className("selected")).getText().within(secs(2)).shouldContain(flights);
+        div(id("leg-selector-1")).div(className("selected")).getText().within(secs(2)).shouldMatch(flights + ".*");
     }
 
     protected FluentWebElement firstShownLeg() {
-        return div(id("sub-graph-1")).div(className("select-leg"));
+        return div(className("select-leg"));
     }
 
 }
