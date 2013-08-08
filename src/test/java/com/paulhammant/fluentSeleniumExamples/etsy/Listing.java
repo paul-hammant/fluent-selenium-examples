@@ -10,8 +10,13 @@ import static org.openqa.selenium.By.className;
 
 public class Listing extends BasePage {
     public Listing(FirefoxDriver delegate) {
-        super(delegate);
+        super(delegate, null);
         assertThat(delegate.getCurrentUrl(), containsString("etsy.com/listing/"));
+    }
+
+    public Cart addToCart() {
+        addToCartButton().click();
+        return new Cart((FirefoxDriver) delegate);
     }
 
     protected FluentWebElement addToCartButton() {

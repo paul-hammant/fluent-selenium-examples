@@ -7,8 +7,18 @@ import org.seleniumhq.selenium.fluent.monitors.ScreenShotOnError;
 
 public class BasePage extends FluentWebDriver {
 
-    public BasePage(FirefoxDriver delegate) {
+
+    protected final HasATimer bizOperationTiming;
+
+    public BasePage(FirefoxDriver delegate, HasATimer bizOperationTiming) {
         super(delegate, new CompositeMonitor(WholeSuiteListener.codahaleMetricsMonitor,
                 new ScreenShotOnError.WithUnitTestFrameWorkContext(delegate, BasePage.class, "test-classes", "surefire-reports")));
+        this.bizOperationTiming = bizOperationTiming;
     }
+
+    public void timeBizOperation(String description) {
+        bizOperationTiming.setTimer(WholeSuiteListener.codahaleMetricsMonitor.start(description + " (End User Experience)"));
+    }
+
+
 }

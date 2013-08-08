@@ -12,8 +12,14 @@ import static org.openqa.selenium.By.id;
 
 public class SearchResults extends BasePage {
     public SearchResults(FirefoxDriver delegate) {
-        super(delegate);
+        super(delegate, null);
         assertThat(delegate.getCurrentUrl(), containsString("/search?"));
+    }
+
+    public Listing selectNonSponsoredFirstItem() {
+        numberMatchingSearchHeader().shouldMatch(".*\\d items.*");
+        firstNonSponsoredListing().link().click();
+        return new Listing((FirefoxDriver) delegate);
     }
 
     protected FluentWebElement firstNonSponsoredListing() {

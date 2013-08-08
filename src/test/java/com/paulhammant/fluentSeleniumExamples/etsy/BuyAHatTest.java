@@ -23,22 +23,10 @@ public class BuyAHatTest {
     @Test
     public void adding_a_hat_to_the_cart() {
 
-        new Home(wd) {{
-            searchFor().sendKeys("Hat");
-            searchButton().click();
-        }};
-
-        new SearchResults(wd) {{
-            numberMatchingSearchHeader().shouldMatch(".*\\d items.*");
-            firstNonSponsoredListing().link().click();
-        }};
-
-        new Listing(wd) {{
-            addToCartButton().click();
-        }};
-
-        new Cart(wd) {{
-            numberOfItemsInCartHeader().shouldContain("1 Item in Your Cart");
-        }};
+        new Home(wd)
+                .searchForA("Hat")
+                .selectNonSponsoredFirstItem()
+                .addToCart()
+                .cartShouldContainItems(1);
     }
 }

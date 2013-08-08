@@ -8,8 +8,14 @@ import static org.openqa.selenium.By.id;
 
 public class Home extends BasePage {
     public Home(FirefoxDriver delegate) {
-        super(delegate);
+        super(delegate, null);
         url().shouldMatch(".*etsy.com/");
+    }
+
+    public SearchResults searchForA(String hat) {
+        searchFor().sendKeys(hat);
+        searchButton().click();
+        return new SearchResults((FirefoxDriver) delegate);
     }
 
     protected FluentWebElement searchButton() {
